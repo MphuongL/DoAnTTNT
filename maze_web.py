@@ -101,7 +101,7 @@ canvas_result = st_canvas(
     background_image=bg_image,
     width=width,
     height=height,
-    drawing_mode="freedraw", # hoặc bỏ tham số này đi
+    drawing_mode="point", # hoặc bỏ tham số này đi
     key="canvas1"
     )
 
