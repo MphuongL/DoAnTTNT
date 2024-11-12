@@ -90,9 +90,6 @@ st.title('Tìm đường trong mê cung')
 # Load the maze image once at the beginning
 bg_image = Image.open("maze.png")  # Load the maze image
 
-# Show the maze image first
-st.image(bg_image, caption="Mê cung ban đầu", use_column_width=True)
-
 # Draw canvas to allow user to select start and goal
 canvas_result = st_canvas(
         fill_color="rgba(255, 165, 0, 0.2)",
@@ -101,7 +98,8 @@ canvas_result = st_canvas(
         background_image=bg_image,
         height=210,
         width=630,
-        drawing_mode="point"
+        drawing_mode="point",
+        key="canvas1"
 )
 
 if canvas_result.json_data is not None:
@@ -139,6 +137,5 @@ if canvas_result.json_data is not None:
             # Draw a small circle at each path point (you can adjust the size and color)
             draw.ellipse((x_pixel - 2, y_pixel - 2, x_pixel + 2, y_pixel + 2), fill="red")
 
-        # Show the updated image with the path
+        # Show the updated image with the path on the same canvas
         st.image(bg_image, caption="Mê cung với lộ trình giải quyết", use_column_width=True)
-
