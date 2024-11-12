@@ -1,10 +1,11 @@
+# Import các thư viện cần thiết
 from PIL import Image, ImageDraw
 import math
 from simpleai.search import SearchProblem, astar
 import streamlit as st
 from streamlit_drawable_canvas import st_canvas
 
-# Define the map (the maze)
+# Định nghĩa bản đồ (mê cung)
 MAP = """
 ##############################
 #         #              #   #
@@ -18,14 +19,12 @@ MAP = """
 ##############################
 """
 
-# Convert map to a list
+# Chuyển đổi bản đồ sang danh sách
 MAP = [list(x) for x in MAP.split("\n") if x]
 
-# Define cost of moving around the map
+# Định nghĩa chi phí di chuyển
 cost_regular = 1.0
 cost_diagonal = 1.7
-
-# Create the cost dictionary
 COSTS = {
     "up": cost_regular,
     "down": cost_regular,
@@ -37,19 +36,17 @@ COSTS = {
     "down right": cost_diagonal,
 }
 
-# Class containing the methods to solve the maze
+# Định nghĩa lớp giải quyết mê cung
 class MazeSolver(SearchProblem):
     def __init__(self, board):
         self.board = board
         self.goal = (0, 0)
-
         for y in range(len(self.board)):
             for x in range(len(self.board[y])):
                 if self.board[y][x].lower() == "o":
                     self.initial = (x, y)
                 elif self.board[y][x].lower() == "x":
                     self.goal = (x, y)
-
         super(MazeSolver, self).__init__(initial_state=self.initial)
 
     def actions(self, state):
@@ -84,14 +81,15 @@ class MazeSolver(SearchProblem):
         return math.sqrt((x - gx) ** 2 + (y - gy) ** 2)
 
 
-W = 21  # Width of each grid cell
+# Kích thước ô lưới
+W = 21
 st.title('Tìm đường trong mê cung')
 
-# Load and display the maze image initially
-bg_image = Image.open("maze.png")  
+# Tải và hiển thị ảnh mê cung ban đầu
+bg_image = Image.open("maze.png")
 st.image(bg_image, caption="Mê cung ban đầu", use_column_width=True)
 
-# Draw canvas to allow user to select start and goal
+# Vẽ canvas cho phép người dùng chọn điểm đầu và điểm cuối
 canvas_result = st_canvas(
         fill_color="rgba(255, 165, 0, 0.2)",
         stroke_width=5,
@@ -103,6 +101,7 @@ canvas_result = st_canvas(
         key="canvas1"
 )
 
+# Kiểm tra nếu người dùng đã chọn điểm đầu và điểm cuối
 if canvas_result.json_data is not None:
     lst_points = canvas_result.json_data["objects"]
     if len(lst_points) == 2:
@@ -113,31 +112,24 @@ if canvas_result.json_data is not None:
 
         x1 = int(px1) // W
         y1 = int(py1) // W
-
         x2 = int(px2) // W
         y2 = int(py2) // W
 
         MAP[y1][x1] = 'o'
         MAP[y2][x2] = 'x'
 
-        # Solve the maze
+        # Giải quyết mê cung
         problem = MazeSolver(MAP)
         result = astar(problem, graph_search=True)
-
-        # Extract the path
         path = [x[1] for x in result.path()]
 
-        # Draw the path on the image
-        draw = ImageDraw.Draw(bg_image)  # Create an ImageDraw object to draw on the image
-
+        # Vẽ lộ trình lên ảnh
+        draw = ImageDraw.Draw(bg_image)
         for point in path:
             px, py = point
-            # Convert the grid cell position to pixel coordinates
-            x_pixel = px * W + W // 2  # Center the point
+            x_pixel = px * W + W // 2
             y_pixel = py * W + W // 2
-            # Draw a small circle at each path point (you can adjust the size and color)
             draw.ellipse((x_pixel - 2, y_pixel - 2, x_pixel + 2, y_pixel + 2), fill="red")
 
-        # Show the updated image with the path on the same canvas
+        # Hiển thị lại ảnh với lộ trình đã giải
         st.image(bg_image, caption="Mê cung với lộ trình giải quyết", use_column_width=True)
-
