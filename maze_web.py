@@ -33,8 +33,8 @@ try:
 except Exception as e:
     st.error(f"Không thể tải ảnh nền: {str(e)}")
 
-# Kiểm tra nếu người dùng đã chọn điểm đầu và điểm cuối
-if canvas_result.json_data and "objects" in canvas_result.json_data:  # Kiểm tra xem có dữ liệu trong canvas_result
+# Kiểm tra xem có dữ liệu trong canvas_result
+if canvas_result and canvas_result.json_data and "objects" in canvas_result.json_data:  # Kiểm tra nếu json_data có dữ liệu hợp lệ
     lst_points = canvas_result.json_data.get("objects", [])
     if len(lst_points) == 2:
         px1 = lst_points[0]['left'] + 3
@@ -66,3 +66,5 @@ if canvas_result.json_data and "objects" in canvas_result.json_data:  # Kiểm t
 
         # Hiển thị lại ảnh với lộ trình đã giải
         st.image(bg_image, caption="Mê cung với lộ trình giải quyết", use_column_width=True)
+else:
+    st.warning("Chưa chọn đủ điểm đầu và điểm cuối!")
