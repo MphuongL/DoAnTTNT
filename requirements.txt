@@ -2,3 +2,4 @@ simpleai
 pillow
 streamlit
 streamlit-drawable-canvas
+numpy
