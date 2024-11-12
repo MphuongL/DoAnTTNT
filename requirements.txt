@@ -1,0 +1,4 @@
+simpleai
+pillow
+streamlit
+streamlit-drawing-canvas
