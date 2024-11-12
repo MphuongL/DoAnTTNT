@@ -1,4 +1,4 @@
 simpleai
 pillow
 streamlit
-streamlit-drawing-canvas
+streamlit-drawable-canvas
