@@ -34,8 +34,8 @@ except Exception as e:
     st.error(f"Không thể tải ảnh nền: {str(e)}")
 
 # Kiểm tra nếu người dùng đã chọn điểm đầu và điểm cuối
-if canvas_result.json_data is not None:
-    lst_points = canvas_result.json_data["objects"]
+if canvas_result.json_data:  # Kiểm tra xem có dữ liệu trong canvas_result
+    lst_points = canvas_result.json_data.get("objects", [])
     if len(lst_points) == 2:
         px1 = lst_points[0]['left'] + 3
         py1 = lst_points[0]['top'] + 3
