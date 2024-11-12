@@ -37,7 +37,6 @@ COSTS = {
     "down right": cost_diagonal,
 }
 
-
 # Class containing the methods to solve the maze
 class MazeSolver(SearchProblem):
     def __init__(self, board):
@@ -87,7 +86,12 @@ class MazeSolver(SearchProblem):
 
 W = 21  # Width of each grid cell
 st.title('Tìm đường trong mê cung')
+
+# Load the maze image once at the beginning
 bg_image = Image.open("maze.png")  # Load the maze image
+
+# Show the maze image first
+st.image(bg_image, caption="Mê cung ban đầu", use_column_width=True)
 
 # Draw canvas to allow user to select start and goal
 canvas_result = st_canvas(
@@ -135,5 +139,6 @@ if canvas_result.json_data is not None:
             # Draw a small circle at each path point (you can adjust the size and color)
             draw.ellipse((x_pixel - 2, y_pixel - 2, x_pixel + 2, y_pixel + 2), fill="red")
 
-        # Show the updated image in the Streamlit app
+        # Show the updated image with the path
         st.image(bg_image, caption="Mê cung với lộ trình giải quyết", use_column_width=True)
+
