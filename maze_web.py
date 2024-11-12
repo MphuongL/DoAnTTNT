@@ -4,7 +4,6 @@ import math
 from simpleai.search import SearchProblem, astar
 import streamlit as st
 from streamlit_drawable_canvas import st_canvas
-import io
 
 # Định nghĩa bản đồ (mê cung)
 MAP = """
@@ -88,6 +87,7 @@ st.title('Tìm đường trong mê cung')
 
 # Tải và hiển thị ảnh mê cung ban đầu
 bg_image = Image.open("maze.png")
+st.image(bg_image, caption="Mê cung ban đầu", use_column_width=True)
 
 # Vẽ canvas cho phép người dùng chọn điểm đầu và điểm cuối
 canvas_result = st_canvas(
@@ -131,19 +131,5 @@ if canvas_result.json_data is not None:
             y_pixel = py * W + W // 2
             draw.ellipse((x_pixel - 2, y_pixel - 2, x_pixel + 2, y_pixel + 2), fill="red")
 
-        # Lưu ảnh có lộ trình vào bộ nhớ tạm
-        buf = io.BytesIO()
-        bg_image.save(buf, format="PNG")
-        buf.seek(0)
-
-        # Cập nhật lại ảnh nền của canvas bằng ảnh đã giải
-        st_canvas(
-            fill_color="rgba(255, 165, 0, 0.2)",
-            stroke_width=5,
-            stroke_color="black",
-            background_image=Image.open(buf),  # Sử dụng ảnh mới đã giải
-            height=210,
-            width=630,
-            drawing_mode="point",
-            key="canvas2"
-        )
+        # Hiển thị lại ảnh với lộ trình đã giải
+        st.image(bg_image, caption="Mê cung với lộ trình giải quyết", use_column_width=True)
