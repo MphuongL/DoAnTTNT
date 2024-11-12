@@ -90,9 +90,6 @@ bg_image = Image.open("maze.png")  # Đảm bảo ảnh maze.png tồn tại tro
 # Lấy kích thước của ảnh để đặt cho canvas
 width, height = bg_image.size
 
-# Hiển thị ảnh nền
-st.image(bg_image, caption="Ảnh nền mê cung", use_column_width=True)
-
 # Tạo canvas với ảnh nền
 canvas_result = st_canvas(
     fill_color="rgba(255, 165, 0, 0.2)",  # Màu vẽ
@@ -104,6 +101,7 @@ canvas_result = st_canvas(
     drawing_mode="point",  # Chế độ vẽ (vẽ điểm)
     key="canvas1"  # Khóa của canvas
 )
+
 
 # Kiểm tra nếu người dùng đã chọn điểm đầu và điểm cuối
 if canvas_result.json_data is not None:
