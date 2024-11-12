@@ -87,8 +87,9 @@ class MazeSolver(SearchProblem):
 W = 21  # Width of each grid cell
 st.title('Tìm đường trong mê cung')
 
-# Load the maze image once at the beginning
-bg_image = Image.open("maze.png")  # Load the maze image
+# Load and display the maze image initially
+bg_image = Image.open("maze.png")  
+st.image(bg_image, caption="Mê cung ban đầu", use_column_width=True)
 
 # Draw canvas to allow user to select start and goal
 canvas_result = st_canvas(
@@ -139,3 +140,4 @@ if canvas_result.json_data is not None:
 
         # Show the updated image with the path on the same canvas
         st.image(bg_image, caption="Mê cung với lộ trình giải quyết", use_column_width=True)
+
