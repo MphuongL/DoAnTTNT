@@ -8,22 +8,30 @@ from streamlit_drawable_canvas import st_canvas
 W = 21
 st.title('Tìm đường trong mê cung')
 
-# Tải ảnh nền
-bg_image = Image.open("maze.png").convert('RGB')  # Đảm bảo ảnh có 3 kênh màu RGB
-width, height = bg_image.size
-img_array = np.array(bg_image)
+# Tải ảnh nền và kiểm tra tính hợp lệ của ảnh
+try:
+    bg_image = Image.open("maze.png").convert("RGB")  # Chuyển thành RGB để tránh lỗi alpha
+    width, height = bg_image.size
+    st.write(f"Kích thước ảnh nền: {width} x {height}")
+    img_array = np.array(bg_image)
 
-# Sử dụng st_canvas với ảnh nền
-canvas_result = st_canvas(
-    fill_color="rgba(255, 165, 0, 0.2)",
-    stroke_width=5,
-    stroke_color="black",
-    background_image=img_array,  # Ảnh nền là mảng NumPy
-    height=height,  # Kích thước chiều cao ảnh
-    width=width,    # Kích thước chiều rộng ảnh
-    drawing_mode="point",
-    key="canvas1"
-)
+    if img_array is not None and img_array.size > 0:
+        # Sử dụng st_canvas với ảnh nền
+        canvas_result = st_canvas(
+            fill_color="rgba(255, 165, 0, 0.2)",
+            stroke_width=5,
+            stroke_color="black",
+            background_image=img_array,  # Ảnh nền là mảng NumPy
+            height=height,  # Kích thước chiều cao ảnh
+            width=width,    # Kích thước chiều rộng ảnh
+            drawing_mode="point",
+            key="canvas1"
+        )
+    else:
+        st.error("Ảnh nền không hợp lệ!")
+
+except Exception as e:
+    st.error(f"Không thể tải ảnh nền: {str(e)}")
 
 # Kiểm tra nếu người dùng đã chọn điểm đầu và điểm cuối
 if canvas_result.json_data is not None:
