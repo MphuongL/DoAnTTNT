@@ -87,7 +87,7 @@ st.title('Tìm đường trong mê cung')
 
 # Tải và hiển thị ảnh mê cung ban đầu
 bg_image = Image.open("maze.png")
-st.image(bg_image, caption="Mê cung ban đầu", use_column_width=True)
+
 
 # Vẽ canvas cho phép người dùng chọn điểm đầu và điểm cuối
 canvas_result = st_canvas(
