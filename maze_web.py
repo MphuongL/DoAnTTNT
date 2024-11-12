@@ -90,17 +90,20 @@ bg_image = Image.open("maze.png")  # Đảm bảo ảnh maze.png tồn tại tro
 # Lấy kích thước của ảnh để đặt cho canvas
 width, height = bg_image.size
 
-# Tạo canvas với ảnh nền
+max_width = 700
+if width > max_width:
+    height = int(height * max_width / width)
+    width = max_width    
 canvas_result = st_canvas(
     fill_color="rgba(255, 165, 0, 0.2)",  # Màu vẽ
     stroke_width=5,  # Độ dày đường vẽ
     stroke_color="black",  # Màu của đường vẽ
-    background_image=bg_image,  # Đặt ảnh nền cho canvas
-    height=height,  # Chiều cao của canvas
-    width=width,    # Chiều rộng của canvas
-    drawing_mode="point",  # Chế độ vẽ (vẽ điểm)
-    key="canvas1"  # Khóa của canvas
-)
+    background_image=bg_image,
+    width=width,
+    height=height,
+    drawing_mode="freedraw", # hoặc bỏ tham số này đi
+    key="canvas1"
+    )
 
 
 # Kiểm tra nếu người dùng đã chọn điểm đầu và điểm cuối
