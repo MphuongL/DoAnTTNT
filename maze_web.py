@@ -98,6 +98,7 @@ canvas_result = st_canvas(
     background_image=bg_image,  # Đặt ảnh nền cho canvas
     height=height,  # Chiều cao của canvas
     width=width,    # Chiều rộng của canvas
+    drawing_mode="point",  # Chế độ vẽ (vẽ điểm)
     key="canvas1"  # Khóa của canvas
 )
 
