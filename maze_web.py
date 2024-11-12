@@ -87,7 +87,7 @@ class MazeSolver(SearchProblem):
 
 W = 21  # Width of each grid cell
 st.title('Tìm đường trong mê cung')
-bg_image = Image.open("maze.png")  # Load the maze image
+bg_image = Image.open("DoAnTTNT/maze.png")  # Load the maze image
 
 # Draw canvas to allow user to select start and goal
 canvas_result = st_canvas(
