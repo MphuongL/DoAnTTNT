@@ -85,7 +85,7 @@ W = 21
 st.title('Tìm đường trong mê cung')
 
 # Tải ảnh nền từ file
-bg_image = Image.open("maze.png")  # Đảm bảo ảnh maze.png tồn tại trong thư mục đúng
+bg_image = Image.open("/maze.png")  # Đảm bảo ảnh maze.png tồn tại trong thư mục đúng
 
 # Lấy kích thước của ảnh để đặt cho canvas
 width, height = bg_image.size
