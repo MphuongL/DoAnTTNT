@@ -85,20 +85,18 @@ class MazeSolver(SearchProblem):
 W = 21
 st.title('Tìm đường trong mê cung')
 
-# Tải và hiển thị ảnh mê cung ban đầu
 bg_image = Image.open("maze.png")
+width, height = bg_image.size
 
-
-# Vẽ canvas cho phép người dùng chọn điểm đầu và điểm cuối
 canvas_result = st_canvas(
-        fill_color="rgba(255, 165, 0, 0.2)",
-        stroke_width=5,
-        stroke_color="black",
-        background_image=bg_image,
-        height=210,
-        width=630,
-        drawing_mode="point",
-        key="canvas1"
+    fill_color="rgba(255, 165, 0, 0.2)",
+    stroke_width=5,
+    stroke_color="black",
+    background_image=bg_image,
+    height=height,  # Kích thước chiều cao ảnh
+    width=width,    # Kích thước chiều rộng ảnh
+    drawing_mode="point",
+    key="canvas1"
 )
 
 # Kiểm tra nếu người dùng đã chọn điểm đầu và điểm cuối
