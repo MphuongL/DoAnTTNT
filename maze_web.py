@@ -21,7 +21,7 @@ try:
             fill_color="rgba(255, 165, 0, 0.2)",
             stroke_width=5,
             stroke_color="black",
-            background_image=img_array,  # Ảnh nền là mảng NumPy
+            background_image=bg_image,  # Ảnh nền là mảng NumPy
             height=height,  # Kích thước chiều cao ảnh
             width=width,    # Kích thước chiều rộng ảnh
             drawing_mode="point",
