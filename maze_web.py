@@ -1,6 +1,7 @@
 # Import các thư viện cần thiết
 from PIL import Image, ImageDraw
 import math
+import numpy as np
 from simpleai.search import SearchProblem, astar
 import streamlit as st
 from streamlit_drawable_canvas import st_canvas
@@ -87,12 +88,12 @@ st.title('Tìm đường trong mê cung')
 
 bg_image = Image.open("maze.png")
 width, height = bg_image.size
-
+img_array = np.array(bg_image)
 canvas_result = st_canvas(
     fill_color="rgba(255, 165, 0, 0.2)",
     stroke_width=5,
     stroke_color="black",
-    background_image=bg_image,
+    background_image=img_array,
     height=height,  # Kích thước chiều cao ảnh
     width=width,    # Kích thước chiều rộng ảnh
     drawing_mode="point",
